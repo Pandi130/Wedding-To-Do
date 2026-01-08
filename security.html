@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Account Security</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+    <script src="app.js"></script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display">
+    <div
+        class="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden max-w-md mx-auto border-x border-[#e5e7eb] dark:border-[#283039]">
+        <!-- Header -->
+        <div
+            class="flex items-center p-4 pb-2 justify-between border-b border-[#e5e7eb] dark:border-[#283039] bg-background-light dark:bg-background-dark sticky top-0 z-10">
+            <a class="text-[#111418] dark:text-white flex size-12 shrink-0 items-center cursor-pointer"
+                href="settings.html">
+                <span class="material-symbols-outlined" style="font-size: 24px;">arrow_back_ios</span>
+            </a>
+            <h2 class="text-[#111418] dark:text-white text-lg font-bold leading-tight flex-1 text-center">Account
+                Security</h2>
+            <div class="size-12"></div>
+        </div>
+
+        <div class="flex flex-col flex-1 p-4 gap-6">
+            <!-- Change Password -->
+            <div class="flex flex-col gap-3">
+                <h3 class="text-[#111418] dark:text-white text-base font-bold">Change Password</h3>
+                <div class="flex flex-col gap-3">
+                    <input id="current-pass" type="password" placeholder="Current Password"
+                        class="w-full rounded-xl bg-white dark:bg-[#1b252f] border border-[#e5e7eb] dark:border-[#283039] p-3 text-[#111418] dark:text-white text-sm focus:ring-primary focus:border-primary">
+                    <input id="new-pass" type="password" placeholder="New Password"
+                        class="w-full rounded-xl bg-white dark:bg-[#1b252f] border border-[#e5e7eb] dark:border-[#283039] p-3 text-[#111418] dark:text-white text-sm focus:ring-primary focus:border-primary">
+                    <input id="confirm-pass" type="password" placeholder="Confirm New Password"
+                        class="w-full rounded-xl bg-white dark:bg-[#1b252f] border border-[#e5e7eb] dark:border-[#283039] p-3 text-[#111418] dark:text-white text-sm focus:ring-primary focus:border-primary">
+                </div>
+                <button id="update-pass-btn"
+                    class="w-full py-3 rounded-xl bg-primary text-white font-bold text-sm shadow-lg shadow-primary/25 hover:bg-primary/90 transition-colors">Update
+                    Password</button>
+            </div>
+
+            <!-- 2FA -->
+            <div
+                class="flex items-center justify-between p-4 rounded-xl bg-white dark:bg-[#1b252f] border border-[#e5e7eb] dark:border-[#283039]">
+                <div class="flex flex-col gap-0.5">
+                    <span class="text-[#111418] dark:text-white text-sm font-bold">Two-Factor Authentication</span>
+                    <span class="text-[#6b7280] dark:text-[#9dabb9] text-xs">Add an extra layer of security</span>
+                </div>
+                <button id="2fa-toggle"
+                    class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none">
+                    <span id="2fa-indicator"
+                        class="translate-x-1 inline-block h-4 w-4 transform rounded-full bg-white transition-transform"></span>
+                </button>
+            </div>
+
+            <!-- Login Activity -->
+            <div class="flex flex-col gap-3">
+                <h3 class="text-[#111418] dark:text-white text-base font-bold">Login Activity</h3>
+                <div class="flex flex-col gap-2">
+                    <div
+                        class="flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-[#1b252f] border border-[#e5e7eb] dark:border-[#283039]">
+                        <span class="material-symbols-outlined text-[#6b7280] dark:text-[#9dabb9]"
+                            style="font-size: 24px;">smartphone</span>
+                        <div class="flex flex-col flex-1">
+                            <span class="text-[#111418] dark:text-white text-sm font-medium">iPhone 14 Pro</span>
+                            <span class="text-[#6b7280] dark:text-[#9dabb9] text-xs">San Francisco, CA • Active
+                                now</span>
+                        </div>
+                    </div>
+                    <div
+                        class="flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-[#1b252f] border border-[#e5e7eb] dark:border-[#283039]">
+                        <span class="material-symbols-outlined text-[#6b7280] dark:text-[#9dabb9]"
+                            style="font-size: 24px;">laptop_mac</span>
+                        <div class="flex flex-col flex-1">
+                            <span class="text-[#111418] dark:text-white text-sm font-medium">MacBook Pro</span>
+                            <span class="text-[#6b7280] dark:text-[#9dabb9] text-xs">San Francisco, CA • 2 hours
+                                ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+        // Password Update
+        document.getElementById('update-pass-btn').addEventListener('click', () => {
+            const current = document.getElementById('current-pass').value;
+            const newPass = document.getElementById('new-pass').value;
+            const confirmPass = document.getElementById('confirm-pass').value;
+
+            if (handlePasswordUpdate(current, newPass, confirmPass)) {
+                // Clear fields on success
+                document.getElementById('current-pass').value = '';
+                document.getElementById('new-pass').value = '';
+                document.getElementById('confirm-pass').value = '';
+            }
+        });
+
+        // 2FA Toggle
+        const twoFaBtn = document.getElementById('2fa-toggle');
+        const twoFaIndicator = document.getElementById('2fa-indicator');
+
+        function update2FAUI(isEnabled) {
+            if (isEnabled) {
+                twoFaBtn.classList.remove('bg-[#d1d5db]', 'dark:bg-[#4b5563]');
+                twoFaBtn.classList.add('bg-primary');
+                twoFaIndicator.classList.remove('translate-x-1');
+                twoFaIndicator.classList.add('translate-x-6');
+            } else {
+                twoFaBtn.classList.remove('bg-primary');
+                twoFaBtn.classList.add('bg-[#d1d5db]');
+                twoFaIndicator.classList.remove('translate-x-6');
+                twoFaIndicator.classList.add('translate-x-1');
+            }
+        }
+
+        // Init 2FA
+        update2FAUI(get2FAState());
+
+        twoFaBtn.addEventListener('click', () => {
+            const newState = toggle2FA();
+            update2FAUI(newState);
+        });
+    </script>
+</body>
+
+</html>

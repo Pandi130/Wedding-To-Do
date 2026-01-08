@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Task Details</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+    <script src="app.js"></script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display">
+    <div
+        class="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden max-w-md mx-auto border-x border-[#e5e7eb] dark:border-[#283039]">
+        <div
+            class="sticky top-0 z-10 flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between border-b border-[#e5e7eb] dark:border-[#283039]">
+            <a class="text-[#111418] dark:text-white flex size-12 shrink-0 items-center cursor-pointer"
+                href="index.html">
+                <span class="material-symbols-outlined" style="font-size: 24px;">arrow_back_ios</span>
+            </a>
+            <h2
+                class="text-[#111418] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">
+                Task Details</h2>
+            <div class="flex w-12 items-center justify-end">
+                <button id="edit-btn"
+                    class="text-primary text-base font-bold leading-normal tracking-[0.015em] shrink-0">Edit</button>
+            </div>
+        </div>
+        <div class="flex-1 flex flex-col p-4 gap-6">
+            <div class="flex flex-col gap-3">
+                <div class="flex items-center justify-between">
+                    <span
+                        class="text-[#6b7280] dark:text-[#9dabb9] text-xs font-bold uppercase tracking-wider">Status</span>
+                </div>
+                <div class="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide">
+                    <button
+                        class="flex items-center gap-2 px-4 py-2.5 rounded-full border border-[#e5e7eb] dark:border-[#283039] bg-white dark:bg-[#1b252f] whitespace-nowrap active:scale-95 transition-all group shrink-0">
+                        <div class="size-2.5 rounded-full bg-slate-400"></div>
+                        <span class="text-[#111418] dark:text-white text-sm font-bold">To-do</span>
+                    </button>
+                    <button
+                        class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-primary text-white whitespace-nowrap shadow-lg shadow-primary/25 active:scale-95 transition-all ring-2 ring-primary ring-offset-2 ring-offset-[#f6f7f8] dark:ring-offset-[#101922] shrink-0">
+                        <span class="material-symbols-outlined" style="font-size: 18px;">autorenew</span>
+                        <span class="text-sm font-bold">In Progress</span>
+                    </button>
+                    <button
+                        class="flex items-center gap-2 px-4 py-2.5 rounded-full border border-[#e5e7eb] dark:border-[#283039] bg-white dark:bg-[#1b252f] whitespace-nowrap active:scale-95 transition-all group shrink-0">
+                        <div class="size-2.5 rounded-full bg-purple-500"></div>
+                        <span class="text-[#111418] dark:text-white text-sm font-bold">In Review</span>
+                    </button>
+                    <button
+                        class="flex items-center gap-2 px-4 py-2.5 rounded-full border border-[#e5e7eb] dark:border-[#283039] bg-white dark:bg-[#1b252f] whitespace-nowrap active:scale-95 transition-all group shrink-0">
+                        <div class="size-2.5 rounded-full bg-red-500"></div>
+                        <span class="text-[#111418] dark:text-white text-sm font-bold">Rejected</span>
+                    </button>
+                    <button
+                        class="flex items-center gap-2 px-4 py-2.5 rounded-full border border-[#e5e7eb] dark:border-[#283039] bg-white dark:bg-[#1b252f] whitespace-nowrap active:scale-95 transition-all group shrink-0">
+                        <div class="size-2.5 rounded-full bg-emerald-500"></div>
+                        <span class="text-[#111418] dark:text-white text-sm font-bold">Accepted</span>
+                    </button>
+                    <button
+                        class="flex items-center gap-2 px-4 py-2.5 rounded-full border border-[#e5e7eb] dark:border-[#283039] bg-white dark:bg-[#1b252f] whitespace-nowrap active:scale-95 transition-all group shrink-0">
+                        <div class="size-2.5 rounded-full bg-blue-500"></div>
+                        <span class="text-[#111418] dark:text-white text-sm font-bold">Completed</span>
+                    </button>
+                </div>
+            </div>
+            <div class="flex flex-col gap-2">
+                <label class="sr-only" for="task-title">Task Title</label>
+                <textarea
+                    class="w-full resize-none overflow-hidden rounded-lg bg-transparent text-[#111418] dark:text-white focus:outline-0 focus:ring-0 border-none p-0 text-2xl font-bold leading-tight placeholder:text-[#9dabb9] disabled:opacity-100 disabled:cursor-text"
+                    id="task-title-input" rows="2" disabled>Redesign Homepage Hero Section</textarea>
+            </div>
+            <div
+                class="flex flex-col gap-1 rounded-xl bg-white dark:bg-[#1b252f] overflow-hidden shadow-sm border border-[#e5e7eb] dark:border-[#283039]">
+                <span class="text-[#6b7280] dark:text-[#9dabb9] text-xs font-medium">Priority</span>
+                <div class="relative w-max">
+                    <select id="task-priority" disabled
+                        class="appearance-none bg-transparent border-none p-0 pr-6 text-[#111418] dark:text-white text-sm font-bold outline-none cursor-pointer focus:ring-0 disabled:opacity-100 disabled:cursor-text">
+                        <option value="High" selected>High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+                    <span
+                        class="absolute right-0 top-1/2 -translate-y-1/2 material-symbols-outlined text-[#111418] dark:text-white pointer-events-none"
+                        style="font-size: 16px;">expand_more</span>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <div class="flex items-center justify-center size-10 rounded-full bg-[#f3f4f6] dark:bg-[#283039]">
+                    <span class="material-symbols-outlined text-[#111418] dark:text-white">pending_actions</span>
+                </div>
+                <div class="flex flex-col flex-1">
+                    <span class="text-[#6b7280] dark:text-[#9dabb9] text-xs font-medium">Status</span>
+                    <div class="relative w-max">
+                        <select id="task-status" disabled
+                            class="appearance-none bg-transparent border-none p-0 pr-6 text-[#111418] dark:text-white text-sm font-bold outline-none cursor-pointer focus:ring-0 disabled:opacity-100 disabled:cursor-text">
+                            <option>Todo</option>
+                            <option selected>In Progress</option>
+                            <option>In Review</option>
+                            <option>Rejected</option>
+                            <option>Accepted</option>
+                            <option>Completed</option>
+                        </select>
+                        <span
+                            class="absolute right-0 top-1/2 -translate-y-1/2 material-symbols-outlined text-[#111418] dark:text-white pointer-events-none"
+                            style="font-size: 16px;">expand_more</span>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="flex items-center gap-4 px-4 py-3 justify-between border-b border-[#f3f4f6] dark:border-[#283039]">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="flex items-center justify-center rounded-lg bg-[#f3f4f6] dark:bg-[#283039] text-[#111418] dark:text-white shrink-0 size-10">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">calendar_today</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <p class="text-[#6b7280] dark:text-[#9dabb9] text-xs font-medium">Due Date</p>
+                        <input id="task-due-date" type="text" value="Oct 24, 2023 at 5:00 PM" disabled
+                            onfocus="(this.type='datetime-local')" onblur="(this.type='text')"
+                            class="bg-transparent border-none p-0 text-[#111418] dark:text-white text-sm font-medium focus:ring-0 placeholder:text-[#9dabb9] w-full disabled:opacity-100 disabled:cursor-text">
+                    </div>
+                </div>
+                <span class="material-symbols-outlined text-[#9dabb9]" style="font-size: 20px;">expand_more</span>
+            </div>
+            <div class="flex items-center gap-4 px-4 py-3 justify-between">
+                <div class="flex items-center gap-3">
+                    <div id="assignee-profile-pic" class="bg-center bg-no-repeat bg-cover rounded-full size-10"
+                        data-alt="Profile picture of Alex M" style=''>
+                    </div>
+                    <div class="flex flex-col">
+                        <p class="text-[#6b7280] dark:text-[#9dabb9] text-xs font-medium">Assignee</p>
+                        <p id="assignee-name" class="text-[#111418] dark:text-white text-sm font-medium">Alex M.</p>
+                    </div>
+                </div>
+                <span class="material-symbols-outlined text-[#9dabb9]" style="font-size: 20px;">expand_more</span>
+            </div>
+            <!-- Category Row -->
+            <div
+                class="flex items-center gap-4 px-4 py-3 justify-between border-b border-[#f3f4f6] dark:border-[#283039]">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="flex items-center justify-center rounded-lg bg-[#f3f4f6] dark:bg-[#283039] text-[#111418] dark:text-white shrink-0 size-10">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">category</span>
+                    </div>
+                    <div class="flex flex-col flex-1">
+                        <span class="text-[#6b7280] dark:text-[#9dabb9] text-xs font-medium">Category</span>
+                        <div class="relative w-max">
+                            <select id="task-category" disabled
+                                class="appearance-none bg-transparent border-none p-0 pr-6 text-[#111418] dark:text-white text-sm font-bold outline-none cursor-pointer focus:ring-0 disabled:opacity-100 disabled:cursor-text">
+                                <option selected>Work</option>
+                                <option>Personal</option>
+                                <option>Urgent</option>
+                            </select>
+                            <span
+                                class="absolute right-0 top-1/2 -translate-y-1/2 material-symbols-outlined text-[#111418] dark:text-white pointer-events-none"
+                                style="font-size: 16px;">expand_more</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Time Estimate Row -->
+            <div
+                class="flex items-center gap-4 px-4 py-3 justify-between border-b border-[#f3f4f6] dark:border-[#283039]">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="flex items-center justify-center rounded-lg bg-[#f3f4f6] dark:bg-[#283039] text-[#111418] dark:text-white shrink-0 size-10">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">timer</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <p class="text-[#6b7280] dark:text-[#9dabb9] text-xs font-medium">Time Estimate</p>
+                        <input type="text" value="2h" id="task-estimate" disabled
+                            class="bg-transparent border-none p-0 text-[#111418] dark:text-white text-sm font-bold focus:ring-0 placeholder:text-[#9dabb9] w-20 disabled:opacity-100 disabled:cursor-text"
+                            placeholder="e.g. 1h">
+                    </div>
+                </div>
+            </div>
+            <!-- Tags Row -->
+            <div class="flex items-center gap-4 px-4 py-3 justify-between">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="flex items-center justify-center rounded-lg bg-[#f3f4f6] dark:bg-[#283039] text-[#111418] dark:text-white shrink-0 size-10">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">label</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <p class="text-[#6b7280] dark:text-[#9dabb9] text-xs font-medium">Tags</p>
+                        <div class="flex items-center gap-2 mt-1">
+                            <span
+                                class="px-2 py-0.5 rounded-md bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-bold">Design</span>
+                            <span
+                                class="px-2 py-0.5 rounded-md bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 text-xs font-bold">Mobile</span>
+                            <span class="material-symbols-outlined text-[#9dabb9] cursor-pointer hover:text-primary"
+                                style="font-size: 18px;">add_circle</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-col gap-2">
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[#6b7280] dark:text-[#9dabb9]"
+                    style="font-size: 20px;">description</span>
+                <h3 class="text-[#111418] dark:text-white text-base font-semibold">Description</h3>
+            </div>
+            <div class="rounded-xl bg-white dark:bg-[#1b252f] p-4 border border-[#e5e7eb] dark:border-[#283039]">
+                <textarea
+                    class="w-full min-h-[120px] bg-transparent text-[#111418] dark:text-white focus:outline-0 focus:ring-0 border-none p-0 text-base font-normal leading-relaxed placeholder:text-[#9dabb9] resize-none disabled:opacity-100 disabled:cursor-text"
+                    id="task-description" disabled
+                    placeholder="Add a description...">Update the hero image to use the new 3D assets and change the CTA button copy to 'Get Started Free'.</textarea>
+            </div>
+        </div>
+        <div class="flex flex-col gap-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[#6b7280] dark:text-[#9dabb9]"
+                        style="font-size: 20px;">checklist</span>
+                    <h3 class="text-[#111418] dark:text-white text-base font-semibold">Subtasks</h3>
+                    <div class="px-2 py-0.5 rounded-full bg-[#f3f4f6] dark:bg-[#283039]">
+                        <p class="text-[#6b7280] dark:text-[#9dabb9] text-xs font-bold">1/2</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col gap-2">
+                <div
+                    class="group flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-[#1b252f] border border-[#e5e7eb] dark:border-[#283039] shadow-sm transition-all hover:border-primary/50">
+                    <button
+                        class="flex items-center justify-center size-6 shrink-0 rounded-full bg-primary border-2 border-primary text-white transition-all">
+                        <span class="material-symbols-outlined" style="font-size: 16px;">check</span>
+                    </button>
+                    <span class="text-[#9ca3af] dark:text-[#6b7280] text-sm font-medium flex-1 line-through">Draft
+                        new copy</span>
+                    <button
+                        class="flex items-center gap-1 px-2 py-1 rounded-md bg-[#f3f4f6] dark:bg-[#283039] text-[#6b7280] dark:text-[#9dabb9] hover:bg-[#e5e7eb] dark:hover:bg-[#374151] transition-colors">
+                        <span class="material-symbols-outlined" style="font-size: 16px;">flag</span>
+                        <span class="text-[10px] font-bold uppercase tracking-wide">Low</span>
+                    </button>
+                </div>
+                <div
+                    class="group flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-[#1b252f] border border-[#e5e7eb] dark:border-[#283039] shadow-sm transition-all hover:border-primary/50">
+                    <button
+                        class="flex items-center justify-center size-6 shrink-0 rounded-full border-2 border-[#d1d5db] dark:border-[#4b5563] text-transparent hover:border-primary hover:text-primary transition-all">
+                        <span class="material-symbols-outlined" style="font-size: 16px;">check</span>
+                    </button>
+                    <span class="text-[#111418] dark:text-white text-sm font-medium flex-1">Prepare 3D
+                        assets</span>
+                    <button
+                        class="flex items-center gap-1 px-2 py-1 rounded-md bg-[#fee2e2] dark:bg-[#3e1a1a] text-[#ef4444] hover:bg-[#fecaca] dark:hover:bg-[#522222] transition-colors">
+                        <span class="material-symbols-outlined"
+                            style="font-size: 16px; font-variation-settings: 'FILL' 1;">flag</span>
+                        <span class="text-[10px] font-bold uppercase tracking-wide">High</span>
+                    </button>
+                </div>
+                <button
+                    class="flex items-center gap-3 p-3 rounded-xl border border-dashed border-[#d1d5db] dark:border-[#4b5563] bg-transparent hover:bg-[#f9fafb] dark:hover:bg-[#1f2937] transition-all group w-full text-left">
+                    <div
+                        class="flex items-center justify-center size-6 shrink-0 rounded-full bg-[#f3f4f6] dark:bg-[#374151] text-[#6b7280] dark:text-[#9dabb9] group-hover:bg-primary group-hover:text-white transition-colors">
+                        <span class="material-symbols-outlined" style="font-size: 18px;">add</span>
+                    </div>
+                    <span
+                        class="text-[#6b7280] dark:text-[#9dabb9] text-sm font-medium group-hover:text-primary transition-colors">Add
+                        new subtask</span>
+                </button>
+            </div>
+        </div>
+        <div class="flex flex-col gap-2 pb-20">
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[#6b7280] dark:text-[#9dabb9]"
+                    style="font-size: 20px;">attach_file</span>
+                <h3 class="text-[#111418] dark:text-white text-base font-semibold">Attachments</h3>
+            </div>
+            <div class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+                <div class="flex flex-col gap-2 shrink-0 w-32">
+                    <div class="bg-center bg-no-repeat bg-cover rounded-xl aspect-square w-full border border-[#e5e7eb] dark:border-[#283039]"
+                        data-alt="Preview of hero section design v2"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCQZmM7NtB8nxfPb-3V_8vG0n-gvW2Lh8VG7qnLuRu5mgQepAa6tL8iRGmHtDfQdo4lE1PZTTPSuJZa6uaRESxE-cedbyR7CF_kHSMnWatwYy8A4EQ2svhHsdGFFp9fYqd2X9Sm9hyKSMAF1JLQTpkG0KGs_4_-Pm9PZYFGTB74adJDhkM_6ieDci5xzMCt68RIhascVvV4eQQIQwUEPXKqcoRY4bGun9VozZAhYfkUIGca_XlhEiibqMykIl08gkPxhrxWRx59JoM");'>
+                    </div>
+                    <p class="text-[#111418] dark:text-white text-xs font-medium truncate">hero-v2.png</p>
+                </div>
+                <div class="flex flex-col gap-2 shrink-0 w-32">
+                    <div
+                        class="flex items-center justify-center rounded-xl aspect-square w-full bg-[#f3f4f6] dark:bg-[#283039] border border-[#e5e7eb] dark:border-[#283039]">
+                        <span class="material-symbols-outlined text-[#9dabb9]" style="font-size: 32px;">add</span>
+                    </div>
+                    <p class="text-[#111418] dark:text-white text-xs font-medium truncate">Add File</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div
+        class="sticky bottom-0 z-10 w-full p-4 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-t border-[#e5e7eb] dark:border-[#283039]">
+        <div class="flex gap-4">
+            <button
+                class="flex size-12 shrink-0 items-center justify-center rounded-xl bg-[#fee2e2] dark:bg-[#3e1a1a] text-[#ef4444]">
+                <span class="material-symbols-outlined" style="font-size: 24px;">delete</span>
+            </button>
+            <button
+                class="flex-1 flex h-12 items-center justify-center gap-2 rounded-xl bg-primary px-6 text-white text-base font-bold shadow-lg shadow-primary/30 active:scale-95 transition-transform">
+                <span class="material-symbols-outlined" style="font-size: 20px;">check_circle</span>
+                <span>Mark Complete</span>
+            </button>
+        </div>
+    </div>
+    </div>
+
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const editBtn = document.getElementById('edit-btn');
+        const inputs = [
+            document.getElementById('task-title-input'),
+            document.getElementById('task-description'),
+            document.getElementById('task-priority'),
+            document.getElementById('task-status'),
+            document.getElementById('task-due-date'),
+            document.getElementById('task-category'),
+            document.getElementById('task-estimate')
+        ];
+
+        let isEditing = false;
+
+        editBtn.addEventListener('click', () => {
+            isEditing = !isEditing;
+
+            if (isEditing) {
+                // Enable Editing
+                inputs.forEach(input => {
+                    if (input) {
+                        input.disabled = false;
+                        input.parentElement.classList.add('ring-1', 'ring-primary/20', 'rounded-sm'); // Visual cue
+                    }
+                });
+                editBtn.textContent = 'Save';
+                editBtn.classList.remove('text-primary');
+                editBtn.classList.add('text-emerald-500'); // Change color to indicate save
+            } else {
+                // Save and Disable
+                inputs.forEach(input => {
+                    if (input) {
+                        input.disabled = true;
+                        input.parentElement.classList.remove('ring-1', 'ring-primary/20', 'rounded-sm');
+                    }
+                });
+                editBtn.textContent = 'Edit';
+                editBtn.classList.remove('text-emerald-500');
+                editBtn.classList.add('text-primary');
+
+                // Here you would typically send data to backend
+                console.log('Task Saved:', {
+                    title: inputs[0].value,
+                    description: inputs[1].value,
+                    priority: inputs[2].value,
+                    status: inputs[3].value,
+                    dueDate: inputs[4].value,
+                    category: inputs[5].value,
+                    estimate: inputs[6].value
+                });
+
+                // Simple alert for feedback
+                // alert('Task details updated!'); // keeping it subtle without alert
+            }
+        });
+
+        // Init Profile
+        function initProfile() {
+            // Note: In a real app, assignee might be different from current user. 
+            // But for this single-user demo, we sync it.
+            const profile = app.userProfile;
+            const pic = document.getElementById('assignee-profile-pic');
+            const name = document.getElementById('assignee-name');
+
+            if (profile) {
+                if (profile.photo) {
+                    pic.style.backgroundImage = `url("${profile.photo}")`;
+                } else {
+                    pic.style.backgroundImage = 'none';
+                    // Placeholder or default color
+                    pic.classList.add('bg-gray-200', 'dark:bg-gray-700');
+                }
+
+                if (profile.name) {
+                    name.textContent = profile.name;
+                }
+            }
+        }
+        initProfile();
+    });
+</script>
+
+</html>

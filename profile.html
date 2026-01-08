@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>My Profile</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+    <script src="app.js"></script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display">
+    <div
+        class="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden max-w-md mx-auto border-x border-[#e5e7eb] dark:border-[#283039]">
+        <!-- Header -->
+        <div
+            class="flex items-center p-4 pb-2 justify-between border-b border-[#e5e7eb] dark:border-[#283039] bg-background-light dark:bg-background-dark sticky top-0 z-10">
+            <a class="text-[#111418] dark:text-white flex size-12 shrink-0 items-center cursor-pointer"
+                href="index.html">
+                <span class="material-symbols-outlined" style="font-size: 24px;">arrow_back_ios</span>
+            </a>
+            <h2 class="text-[#111418] dark:text-white text-lg font-bold leading-tight flex-1 text-center">My Profile
+            </h2>
+            <div class="size-12"></div> <!-- Spacer -->
+        </div>
+
+        <div class="flex flex-col flex-1 p-6 items-center gap-6">
+            <!-- Profile Info -->
+            <div class="flex flex-col items-center gap-2">
+                <div class="relative">
+                    <input type="file" id="profile-upload" accept="image/*" class="hidden">
+                    <div id="profile-image-container"
+                        class="user-profile-pic bg-center bg-no-repeat bg-cover rounded-full size-24 border-4 border-white dark:border-[#1b252f] shadow-lg"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBSvQA1ClEstSkKWz5BSF3vy6pl6ZzgdxthIri9JmaONsH1EvkUjsO_GYH1G4ls0CjA815iIj5xRR1I7OtmmYYX7byqI983vpW0nGDz0pMQ-qfWSPhqq7eGwsivMxc7mYSI7ivF8KjYvmPtwxeRPeOwCApcpnAeyQUe1CdLz6qDr0KZqd8vHFVaS6t_xR9bSfuM44oSmPHTF9LM8COa-pLBlgI0xI2pe8SbYIdoDDmw3i-FrYHYkoMlJjVnkYwBznbvi2GPFv0yCEg");'>
+                    </div>
+                    <button id="edit-profile-pic-btn"
+                        class="absolute bottom-0 right-0 p-1.5 rounded-full bg-primary text-white border-2 border-white dark:border-[#1b252f]">
+                        <span class="material-symbols-outlined" style="font-size: 16px;">edit</span>
+                    </button>
+                </div>
+                <h1 id="header-profile-name" class="text-[#111418] dark:text-white text-xl font-bold">Alex Morgan</h1>
+                <p id="header-profile-role" class="text-[#6b7280] dark:text-[#9dabb9] text-sm font-medium">Product
+                    Designer</p>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-2 gap-4 w-full">
+                <div
+                    class="flex flex-col items-center gap-1 p-4 rounded-xl bg-white dark:bg-[#1b252f] border border-[#e5e7eb] dark:border-[#283039]">
+                    <span id="profile-stat-completed"
+                        class="text-2xl font-bold text-[#111418] dark:text-white">--</span>
+                    <span
+                        class="text-xs font-medium text-[#6b7280] dark:text-[#9dabb9] uppercase tracking-wider">Completed</span>
+                </div>
+                <div
+                    class="flex flex-col items-center gap-1 p-4 rounded-xl bg-white dark:bg-[#1b252f] border border-[#e5e7eb] dark:border-[#283039]">
+                    <span id="profile-stat-pending" class="text-2xl font-bold text-[#111418] dark:text-white">--</span>
+                    <span
+                        class="text-xs font-medium text-[#6b7280] dark:text-[#9dabb9] uppercase tracking-wider">Pending</span>
+                </div>
+            </div>
+
+            <!-- Details Form -->
+            <div class="flex flex-col w-full gap-4 mt-2">
+                <div class="flex flex-col gap-2">
+                    <label class="text-[#111418] dark:text-white text-sm font-bold">Full Name</label>
+                    <input type="text" id="profile-name" value="Alex Morgan"
+                        class="w-full rounded-xl bg-white dark:bg-[#1b252f] border border-[#e5e7eb] dark:border-[#283039] p-3 text-[#111418] dark:text-white text-sm focus:ring-primary focus:border-primary">
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label class="text-[#111418] dark:text-white text-sm font-bold">Email</label>
+                    <input type="email" id="profile-email" value="alex.m@example.com"
+                        class="w-full rounded-xl bg-white dark:bg-[#1b252f] border border-[#e5e7eb] dark:border-[#283039] p-3 text-[#111418] dark:text-white text-sm focus:ring-primary focus:border-primary">
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label class="text-[#111418] dark:text-white text-sm font-bold">Phone</label>
+                    <input type="tel" id="profile-phone" value="+1 (555) 000-0000"
+                        class="w-full rounded-xl bg-white dark:bg-[#1b252f] border border-[#e5e7eb] dark:border-[#283039] p-3 text-[#111418] dark:text-white text-sm focus:ring-primary focus:border-primary">
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <button id="save-profile-btn"
+                class="w-full mt-4 flex items-center justify-center gap-2 p-3 rounded-xl bg-primary text-white font-bold text-sm hover:bg-blue-600 transition-colors">
+                <span class="material-symbols-outlined" style="font-size: 20px;">save</span>
+                Save Changes
+            </button>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Load Profile Data
+            const profile = app.userProfile;
+
+            const nameInput = document.getElementById('profile-name');
+            const emailInput = document.getElementById('profile-email');
+            const phoneInput = document.getElementById('profile-phone');
+
+            nameInput.value = profile.name || '';
+            emailInput.value = profile.email || '';
+            phoneInput.value = profile.phone || '';
+
+            // Sync Header
+            const headerName = document.getElementById('header-profile-name');
+            const headerRole = document.getElementById('header-profile-role');
+
+            headerName.textContent = profile.name || 'User';
+            headerRole.textContent = profile.title || 'Productivity Master';
+
+            // 2. Load Stats (Mock logic derived from tasks)
+            const tasks = app.getTasks();
+            const completedCount = tasks.filter(t => t.status === 'Done').length;
+            const pendingCount = tasks.filter(t => t.status !== 'Done').length;
+
+            document.getElementById('profile-stat-completed').textContent = completedCount;
+            document.getElementById('profile-stat-pending').textContent = pendingCount;
+
+            // 3. Save Logic
+            document.getElementById('save-profile-btn').addEventListener('click', () => {
+                const updatedData = {
+                    name: nameInput.value,
+                    email: emailInput.value,
+                    phone: phoneInput.value,
+                    // Title/Role isn't editable here by design in original HTML, 
+                    // but we sync it just in case or keep existing
+                };
+
+                app.updateProfile(updatedData);
+
+                // Update Header immediately
+                headerName.textContent = updatedData.name;
+
+                // Show temporary feedback
+                const btn = document.getElementById('save-profile-btn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<span class="material-symbols-outlined">check</span> Saved!';
+                btn.classList.add('bg-green-600');
+                btn.classList.remove('bg-primary');
+
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('bg-green-600');
+                    btn.classList.add('bg-primary');
+                }, 2000);
+            });
+
+            // 4. Image Upload Logic
+            const fileInput = document.getElementById('profile-upload');
+            const editBtn = document.getElementById('edit-profile-pic-btn');
+            const profileImageContainer = document.getElementById('profile-image-container');
+
+            // Load initial image
+            if (profile.photo) {
+                profileImageContainer.style.backgroundImage = `url("${profile.photo}")`;
+            }
+
+            if (editBtn) {
+                editBtn.addEventListener('click', () => {
+                    fileInput.click();
+                });
+            }
+
+            if (fileInput) {
+                fileInput.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+
+                    if (file.size > 2 * 1024 * 1024) {
+                        alert('Image is too large. Please choose an image under 2MB.');
+                        return;
+                    }
+
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+                        const base64 = event.target.result;
+                        app.updateProfile({ photo: base64 });
+                        profileImageContainer.style.backgroundImage = `url("${base64}")`;
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

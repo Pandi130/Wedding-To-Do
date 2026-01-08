@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Help & Support</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+    <script src="app.js"></script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display">
+    <div
+        class="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden max-w-md mx-auto border-x border-[#e5e7eb] dark:border-[#283039]">
+        <!-- Header -->
+        <div
+            class="flex items-center p-4 pb-2 justify-between border-b border-[#e5e7eb] dark:border-[#283039] bg-background-light dark:bg-background-dark sticky top-0 z-10">
+            <a class="text-[#111418] dark:text-white flex size-12 shrink-0 items-center cursor-pointer"
+                href="settings.html">
+                <span class="material-symbols-outlined" style="font-size: 24px;">arrow_back_ios</span>
+            </a>
+            <h2 class="text-[#111418] dark:text-white text-lg font-bold leading-tight flex-1 text-center">Help & Support
+            </h2>
+            <div class="size-12"></div>
+        </div>
+
+        <div class="flex flex-col flex-1 p-4 gap-6">
+            <!-- Search -->
+            <div class="relative">
+                <span class="absolute left-3 top-3 material-symbols-outlined text-[#9dabb9]"
+                    style="font-size: 20px;">search</span>
+                <input type="text" placeholder="Search for help..."
+                    class="w-full rounded-xl bg-white dark:bg-[#1b252f] border border-[#e5e7eb] dark:border-[#283039] py-3 pl-10 pr-4 text-[#111418] dark:text-white text-sm focus:ring-primary focus:border-primary">
+            </div>
+
+            <!-- FAQ -->
+            <div class="flex flex-col gap-3">
+                <h3 class="text-[#111418] dark:text-white text-base font-bold">Frequently Asked Questions</h3>
+
+                <details
+                    class="group rounded-xl bg-white dark:bg-[#1b252f] border border-[#e5e7eb] dark:border-[#283039] overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between p-4 cursor-pointer list-none font-medium text-[#111418] dark:text-white text-sm">
+                        <span>How do I enable Dark Mode?</span>
+                        <span
+                            class="material-symbols-outlined transition-transform group-open:rotate-180 text-[#9dabb9]">expand_more</span>
+                    </summary>
+                    <div class="px-4 pb-4 text-xs text-[#6b7280] dark:text-[#9dabb9]">
+                        Go to Settings and toggle the "Dark Mode" switch. Your preference will be saved automatically.
+                    </div>
+                </details>
+
+                <details
+                    class="group rounded-xl bg-white dark:bg-[#1b252f] border border-[#e5e7eb] dark:border-[#283039] overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between p-4 cursor-pointer list-none font-medium text-[#111418] dark:text-white text-sm">
+                        <span>Can I sync my tasks?</span>
+                        <span
+                            class="material-symbols-outlined transition-transform group-open:rotate-180 text-[#9dabb9]">expand_more</span>
+                    </summary>
+                    <div class="px-4 pb-4 text-xs text-[#6b7280] dark:text-[#9dabb9]">
+                        Currently, tasks are stored locally on your device. Cloud sync is coming in a future update!
+                    </div>
+                </details>
+
+                <details
+                    class="group rounded-xl bg-white dark:bg-[#1b252f] border border-[#e5e7eb] dark:border-[#283039] overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between p-4 cursor-pointer list-none font-medium text-[#111418] dark:text-white text-sm">
+                        <span>How to reset my password?</span>
+                        <span
+                            class="material-symbols-outlined transition-transform group-open:rotate-180 text-[#9dabb9]">expand_more</span>
+                    </summary>
+                    <div class="px-4 pb-4 text-xs text-[#6b7280] dark:text-[#9dabb9]">
+                        Go to Settings > Account Security > Change Password. You will need your current password.
+                    </div>
+                </details>
+            </div>
+
+            <!-- Contact -->
+            <div class="flex flex-col gap-3 mt-4">
+                <h3 class="text-[#111418] dark:text-white text-base font-bold">Contact Us</h3>
+                <div class="flex flex-col gap-3">
+                    <textarea id="contact-message" placeholder="Describe your issue..."
+                        class="w-full rounded-xl bg-white dark:bg-[#1b252f] border border-[#e5e7eb] dark:border-[#283039] p-3 text-[#111418] dark:text-white text-sm focus:ring-primary focus:border-primary resize-none h-24"></textarea>
+                    <button id="send-msg-btn"
+                        class="w-full py-3 rounded-xl bg-primary text-white font-bold text-sm shadow-lg shadow-primary/25 hover:bg-primary/90 transition-colors">Send
+                        Message</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+        document.getElementById('send-msg-btn').addEventListener('click', () => {
+            const msgInput = document.getElementById('contact-message');
+            if (handleContactSubmit(msgInput.value)) {
+                msgInput.value = '';
+            }
+        });
+    </script>
+</body>
+
+</html>

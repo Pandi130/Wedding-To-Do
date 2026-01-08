@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Settings</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display">
+    <div
+        class="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden max-w-md mx-auto border-x border-[#e5e7eb] dark:border-[#283039]">
+        <!-- Header -->
+        <div
+            class="flex items-center p-4 pb-2 justify-between border-b border-[#e5e7eb] dark:border-[#283039] bg-background-light dark:bg-background-dark sticky top-0 z-10">
+            <a class="text-[#111418] dark:text-white flex size-12 shrink-0 items-center cursor-pointer"
+                href="index.html">
+                <span class="material-symbols-outlined" style="font-size: 24px;">arrow_back_ios</span>
+            </a>
+            <h2 class="text-[#111418] dark:text-white text-lg font-bold leading-tight flex-1 text-center">Settings</h2>
+            <div class="size-12"></div> <!-- Spacer -->
+        </div>
+
+        <div class="flex flex-col flex-1 p-4 gap-2">
+            <!-- Profile Section -->
+            <p class="px-2 mt-2 text-[#6b7280] dark:text-[#9dabb9] text-xs font-bold uppercase tracking-wider">Profile
+            </p>
+            <div
+                class="flex flex-col items-center p-6 rounded-xl bg-white dark:bg-[#1b252f] border border-[#e5e7eb] dark:border-[#283039] gap-4">
+                <div class="relative group">
+                    <div class="size-24 rounded-full overflow-hidden bg-[#f3f4f6] dark:bg-[#283039] border-2 border-white dark:border-[#283039] shadow-sm cursor-pointer"
+                        id="profile-photo-container">
+                        <img id="profile-photo" src="" alt="Profile Photo" class="w-full h-full object-cover hidden">
+                        <div id="profile-placeholder"
+                            class="w-full h-full flex items-center justify-center text-[#9dabb9]">
+                            <span class="material-symbols-outlined" style="font-size: 40px;">person</span>
+                        </div>
+                    </div>
+                    <button id="edit-photo-btn"
+                        class="absolute bottom-0 right-0 p-1.5 rounded-full bg-primary text-white shadow-md hover:bg-opacity-90 transition-all">
+                        <span class="material-symbols-outlined" style="font-size: 16px;">edit</span>
+                    </button>
+                    <input type="file" id="photo-input" accept="image/*" class="hidden">
+                    <div id="photo-loading"
+                        class="absolute inset-0 bg-black/50 rounded-full flex items-center justify-center hidden">
+                        <div class="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    </div>
+                </div>
+
+                <div class="w-full flex flex-col gap-3">
+                    <div>
+                        <label
+                            class="block text-xs font-medium text-[#6b7280] dark:text-[#9dabb9] mb-1 px-1">Name</label>
+                        <input type="text" id="profile-name"
+                            class="w-full bg-[#f9fafb] dark:bg-[#111920] border border-[#e5e7eb] dark:border-[#283039] rounded-lg px-3 py-2 text-sm text-[#111418] dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-[#9dabb9]"
+                            placeholder="Your Name">
+                    </div>
+                    <div>
+                        <label
+                            class="block text-xs font-medium text-[#6b7280] dark:text-[#9dabb9] mb-1 px-1">Title</label>
+                        <input type="text" id="profile-title"
+                            class="w-full bg-[#f9fafb] dark:bg-[#111920] border border-[#e5e7eb] dark:border-[#283039] rounded-lg px-3 py-2 text-sm text-[#111418] dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-[#9dabb9]"
+                            placeholder="Job Title / Role">
+                    </div>
+                </div>
+            </div>
+
+            <!-- App Settings -->
+            <p class="px-2 mt-2 text-[#6b7280] dark:text-[#9dabb9] text-xs font-bold uppercase tracking-wider">App
+                Settings</p>
+
+            <div
+                class="flex items-center justify-between p-4 rounded-xl bg-white dark:bg-[#1b252f] border border-[#e5e7eb] dark:border-[#283039]">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="flex items-center justify-center size-8 rounded-lg bg-[#f3f4f6] dark:bg-[#283039] text-[#111418] dark:text-white">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">dark_mode</span>
+                    </div>
+                    <span class="text-[#111418] dark:text-white text-sm font-medium">Dark Mode</span>
+                </div>
+                <button id="theme-toggle"
+                    class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none">
+                    <span id="theme-indicator"
+                        class="translate-x-1 inline-block h-4 w-4 transform rounded-full bg-white transition-transform"></span>
+                </button>
+            </div>
+
+            <script src="app.js"></script>
+            <script>
+                const toggleBtn = document.getElementById('theme-toggle');
+                const indicator = document.getElementById('theme-indicator');
+
+                function updateToggleUI(isDark) {
+                    if (isDark) {
+                        toggleBtn.classList.remove('bg-[#d1d5db]', 'dark:bg-[#4b5563]');
+                        toggleBtn.classList.add('bg-primary');
+                        indicator.classList.remove('translate-x-1');
+                        indicator.classList.add('translate-x-6');
+                    } else {
+                        toggleBtn.classList.remove('bg-primary');
+                        toggleBtn.classList.add('bg-[#d1d5db]');
+                        indicator.classList.remove('translate-x-6');
+                        indicator.classList.add('translate-x-1');
+                    }
+                }
+
+                // Init UI
+                const isDarkInitial = document.documentElement.classList.contains('dark');
+                updateToggleUI(isDarkInitial);
+
+                toggleBtn.addEventListener('click', () => {
+                    const isDarkNow = toggleTheme();
+                    updateToggleUI(isDarkNow);
+                });
+
+                // Notifications UI
+                const notifBtn = document.getElementById('notif-toggle');
+                const notifIndicator = document.getElementById('notif-indicator');
+
+                function updateNotifUI(isEnabled) {
+                    if (isEnabled) {
+                        notifBtn.classList.remove('bg-[#d1d5db]', 'dark:bg-[#4b5563]');
+                        notifBtn.classList.add('bg-primary');
+                        notifIndicator.classList.remove('translate-x-1');
+                        notifIndicator.classList.add('translate-x-6');
+                    } else {
+                        notifBtn.classList.remove('bg-primary');
+                        notifBtn.classList.add('bg-[#d1d5db]');
+                        notifIndicator.classList.remove('translate-x-6');
+                        notifIndicator.classList.add('translate-x-1');
+                    }
+                }
+
+                // Init Notif
+                // Note: getNotificationState is not strictly in app.js shown but assumed from Legacy shim or similar. 
+                // If it fails, we default to false.
+                const notifState = typeof getNotificationState === 'function' ? getNotificationState() : false;
+                updateNotifUI(notifState);
+
+                notifBtn.addEventListener('click', () => {
+                    // Mock functionality for notifications if function missing
+                    const current = notifBtn.classList.contains('bg-primary');
+                    updateNotifUI(!current);
+                });
+
+                // --- Profile Logic ---
+                const nameInput = document.getElementById('profile-name');
+                const titleInput = document.getElementById('profile-title');
+                const photoInput = document.getElementById('photo-input');
+                const photoContainer = document.getElementById('profile-photo-container');
+                const editPhotoBtn = document.getElementById('edit-photo-btn');
+                const profilePhoto = document.getElementById('profile-photo');
+                const profilePlaceholder = document.getElementById('profile-placeholder');
+                const photoLoading = document.getElementById('photo-loading');
+
+                function loadProfileUI() {
+                    const profile = app.userProfile;
+                    if (profile) {
+                        nameInput.value = profile.name || '';
+                        titleInput.value = profile.title || '';
+
+                        if (profile.photo) {
+                            profilePhoto.src = profile.photo;
+                            profilePhoto.classList.remove('hidden');
+                            profilePlaceholder.classList.add('hidden');
+                        } else {
+                            profilePhoto.classList.add('hidden');
+                            profilePlaceholder.classList.remove('hidden');
+                        }
+                    }
+                }
+
+                // Init Profile
+                loadProfileUI();
+
+                // Auto-save Text
+                nameInput.addEventListener('input', (e) => {
+                    app.updateProfile({ name: e.target.value });
+                });
+
+                titleInput.addEventListener('input', (e) => {
+                    app.updateProfile({ title: e.target.value });
+                });
+
+                // Photo Upload
+                function triggerPhotoUpload() {
+                    photoInput.click();
+                }
+
+                photoContainer.addEventListener('click', triggerPhotoUpload);
+                editPhotoBtn.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent double trigger
+                    triggerPhotoUpload();
+                });
+
+                photoInput.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        // Validate size (simple check, e.g. < 2MB to be safe for localStorage)
+                        if (file.size > 2 * 1024 * 1024) {
+                            alert('Image is too large. Please choose an image under 2MB.');
+                            return;
+                        }
+
+                        photoLoading.classList.remove('hidden');
+
+                        const reader = new FileReader();
+                        reader.onload = function (event) {
+                            const base64 = event.target.result;
+                            app.updateProfile({ photo: base64 });
+                            loadProfileUI(); // Refresh UI
+                            photoLoading.classList.add('hidden');
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            </script>
+
+            <div
+                class="flex items-center justify-between p-4 rounded-xl bg-white dark:bg-[#1b252f] border border-[#e5e7eb] dark:border-[#283039]">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="flex items-center justify-center size-8 rounded-lg bg-[#f3f4f6] dark:bg-[#283039] text-[#111418] dark:text-white">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">notifications</span>
+                    </div>
+                    <span class="text-[#111418] dark:text-white text-sm font-medium">Notifications</span>
+                </div>
+                <button id="notif-toggle"
+                    class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none">
+                    <span id="notif-indicator"
+                        class="translate-x-1 inline-block h-4 w-4 transform rounded-full bg-white transition-transform"></span>
+                </button>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div
+                class="sticky bottom-0 z-10 w-full bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-t border-[#e5e7eb] dark:border-[#283039] mt-6">
+                <div class="grid grid-cols-4 h-16">
+                    <a href="index.html"
+                        class="flex flex-col items-center justify-center gap-1 text-[#9dabb9] hover:text-[#111418] dark:hover:text-white transition-colors">
+                        <span class="material-symbols-outlined" style="font-size: 24px;">list</span>
+                        <span class="text-[10px] font-medium">Tasks</span>
+                    </a>
+                    <a href="calendar.html"
+                        class="flex flex-col items-center justify-center gap-1 text-[#9dabb9] hover:text-[#111418] dark:hover:text-white transition-colors">
+                        <span class="material-symbols-outlined" style="font-size: 24px;">calendar_month</span>
+                        <span class="text-[10px] font-medium">Calendar</span>
+                    </a>
+                    <a href="alerts.html"
+                        class="flex flex-col items-center justify-center gap-1 text-[#9dabb9] hover:text-[#111418] dark:hover:text-white transition-colors">
+                        <span class="material-symbols-outlined" style="font-size: 24px;">notifications</span>
+                        <span class="text-[10px] font-medium">Alerts</span>
+                    </a>
+                    <button class="flex flex-col items-center justify-center gap-1 text-primary">
+                        <span class="material-symbols-outlined"
+                            style="font-size: 24px; font-variation-settings: 'FILL' 1;">settings</span>
+                        <span class="text-[10px] font-bold">Settings</span>
+                    </button>
+                </div>
+            </div>
+            <!-- General -->
+            <p class="px-2 mt-4 text-[#6b7280] dark:text-[#9dabb9] text-xs font-bold uppercase tracking-wider">General
+            </p>
+
+            <a href="security.html"
+                class="flex items-center justify-between p-4 rounded-xl bg-white dark:bg-[#1b252f] border border-[#e5e7eb] dark:border-[#283039] w-full text-left group active:scale-[0.98] transition-all">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="flex items-center justify-center size-8 rounded-lg bg-[#f3f4f6] dark:bg-[#283039] text-[#111418] dark:text-white">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">lock</span>
+                    </div>
+                    <span class="text-[#111418] dark:text-white text-sm font-medium">Account Security</span>
+                </div>
+                <span class="material-symbols-outlined text-[#9dabb9] group-hover:text-primary transition-colors"
+                    style="font-size: 20px;">chevron_right</span>
+            </a>
+            <a href="privacy.html"
+                class="flex items-center justify-between p-4 rounded-xl bg-white dark:bg-[#1b252f] border border-[#e5e7eb] dark:border-[#283039] w-full text-left group active:scale-[0.98] transition-all">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="flex items-center justify-center size-8 rounded-lg bg-[#f3f4f6] dark:bg-[#283039] text-[#111418] dark:text-white">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">privacy_tip</span>
+                    </div>
+                    <span class="text-[#111418] dark:text-white text-sm font-medium">Privacy Policy</span>
+                </div>
+                <span class="material-symbols-outlined text-[#9dabb9] group-hover:text-primary transition-colors"
+                    style="font-size: 20px;">chevron_right</span>
+            </a>
+            <a href="help.html"
+                class="flex items-center justify-between p-4 rounded-xl bg-white dark:bg-[#1b252f] border border-[#e5e7eb] dark:border-[#283039] w-full text-left group active:scale-[0.98] transition-all">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="flex items-center justify-center size-8 rounded-lg bg-[#f3f4f6] dark:bg-[#283039] text-[#111418] dark:text-white">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">help</span>
+                    </div>
+                    <span class="text-[#111418] dark:text-white text-sm font-medium">Help & Support</span>
+                </div>
+                <span class="material-symbols-outlined text-[#9dabb9] group-hover:text-primary transition-colors"
+                    style="font-size: 20px;">chevron_right</span>
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>

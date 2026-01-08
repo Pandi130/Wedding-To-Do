@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Notifications</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+    <script src="app.js"></script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display">
+    <div
+        class="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden max-w-md mx-auto border-x border-[#e5e7eb] dark:border-[#283039]">
+        <!-- Header -->
+        <div
+            class="flex items-center p-4 pb-2 justify-between border-b border-[#e5e7eb] dark:border-[#283039] bg-background-light dark:bg-background-dark sticky top-0 z-10">
+            <h1 class="text-[#111418] dark:text-white text-2xl font-bold leading-tight tracking-[-0.015em]">
+                Notifications</h1>
+            <div class="flex items-center gap-2">
+                <span class="text-[#111418] dark:text-white text-xs font-bold cursor-pointer hover:text-primary">Mark
+                    all read</span>
+            </div>
+        </div>
+
+        <div id="notifications-list" class="flex flex-col flex-1 p-4 gap-4 pb-24">
+            <!-- Dynamic content -->
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const list = document.getElementById('notifications-list');
+                const notifs = TaskManager.getNotifications();
+
+                if (notifs.length === 0) {
+                    list.innerHTML = `
+                        <div class="flex flex-col items-center justify-center h-full text-center mt-20 opacity-50">
+                            <span class="material-symbols-outlined text-4xl mb-2">notifications_off</span>
+                            <p class="text-sm">No new notifications</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // Render
+                list.innerHTML = '';
+                notifs.forEach(n => {
+                    const div = document.createElement('div');
+
+                    let colorClass = 'bg-primary';
+                    if (n.type === 'overdue') colorClass = 'bg-red-500';
+
+                    div.innerHTML = `
+                        <div onclick="if('${n.link}' !== '#') window.location.href='${n.link}'" class="cursor-pointer group flex gap-4 p-4 rounded-xl bg-white dark:bg-[#1b252f] border border-[#e5e7eb] dark:border-[#283039] relative overflow-hidden transition-all hover:border-primary/50">
+                            <div class="absolute top-4 left-4 size-2 rounded-full ${colorClass}"></div>
+                            <div class="pl-4 flex flex-col gap-1 w-full">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[#111418] dark:text-white text-sm font-bold">${n.title}</span>
+                                    <span class="text-[#6b7280] dark:text-[#9dabb9] text-xs">${n.time}</span>
+                                </div>
+                                <p class="text-[#111418] dark:text-white text-sm">${n.message}</p>
+                            </div>
+                        </div>
+                    `;
+                    list.appendChild(div);
+                });
+            });
+        </script>
+
+        <!-- Bottom Navigation -->
+        <div
+            class="sticky bottom-0 z-10 w-full bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-t border-[#e5e7eb] dark:border-[#283039]">
+            <div class="grid grid-cols-4 h-16">
+                <a href="index.html"
+                    class="flex flex-col items-center justify-center gap-1 text-[#9dabb9] hover:text-[#111418] dark:hover:text-white transition-colors">
+                    <span class="material-symbols-outlined" style="font-size: 24px;">list</span>
+                    <span class="text-[10px] font-medium">Tasks</span>
+                </a>
+                <a href="calendar.html"
+                    class="flex flex-col items-center justify-center gap-1 text-[#9dabb9] hover:text-[#111418] dark:hover:text-white transition-colors">
+                    <span class="material-symbols-outlined" style="font-size: 24px;">calendar_month</span>
+                    <span class="text-[10px] font-medium">Calendar</span>
+                </a>
+                <button class="flex flex-col items-center justify-center gap-1 text-primary">
+                    <span class="material-symbols-outlined"
+                        style="font-size: 24px; font-variation-settings: 'FILL' 1;">notifications</span>
+                    <span class="text-[10px] font-bold">Alerts</span>
+                </button>
+                <a href="settings.html"
+                    class="flex flex-col items-center justify-center gap-1 text-[#9dabb9] hover:text-[#111418] dark:hover:text-white transition-colors">
+                    <span class="material-symbols-outlined" style="font-size: 24px;">settings</span>
+                    <span class="text-[10px] font-medium">Settings</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

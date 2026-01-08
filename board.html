@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Task Board</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3b82f6", // More modern blue
+                        "background-light": "#f8fafc", // Slate-50
+                        "background-dark": "#0f172a", // Slate-900
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1e293b", // Slate-800
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "2xl": "1.5rem", "full": "9999px" },
+                    boxShadow: {
+                        "glass": "0 8px 32px 0 rgba(31, 38, 135, 0.05)",
+                        "glow": "0 0 15px rgba(59, 130, 246, 0.5)"
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            min-height: max(600px, 100dvh);
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Custom Scrollbar for board horizontal scroll */
+        .board-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .board-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .board-container::-webkit-scrollbar-thumb {
+            background-color: #d1d5db;
+            border-radius: 20px;
+        }
+
+        .dark .board-container::-webkit-scrollbar-thumb {
+            background-color: #4b5563;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display h-screen flex flex-col overflow-hidden">
+    <!-- Header -->
+    <div
+        class="flex items-center justify-between p-4 bg-background-light dark:bg-background-dark border-b border-[#e5e7eb] dark:border-[#283039] shrink-0">
+        <div class="flex items-center gap-4">
+            <h1 class="text-[#111418] dark:text-white text-2xl font-bold leading-tight tracking-[-0.015em]">Task Board
+            </h1>
+            <a href="index.html"
+                class="flex items-center gap-2 text-[#6b7280] dark:text-[#9dabb9] hover:text-primary transition-colors">
+                <span class="material-symbols-outlined">list</span>
+                <span class="text-sm font-bold">List View</span>
+            </a>
+        </div>
+        <div class="flex items-center gap-4">
+            <button id="add-task-btn"
+                class="flex items-center gap-2 px-4 py-2 rounded-xl bg-primary text-white font-bold shadow-lg shadow-primary/25 hover:bg-primary/90 transition-colors">
+                <span class="material-symbols-outlined" style="font-size: 20px;">add</span>
+                <span class="text-sm">New Task</span>
+            </button>
+            <a href="profile.html" id="header-profile-pic"
+                class="user-profile-pic bg-center bg-no-repeat bg-cover rounded-full size-10" style=''>
+            </a>
+        </div>
+    </div>
+
+    <!-- Board -->
+    <div class="board-container flex-1 overflow-x-auto overflow-y-hidden p-6">
+        <div class="flex gap-6 h-full min-w-max">
+
+            <!-- Columns (Dynamic rendering or hardcoded structure) -->
+            <!-- 1. To-do -->
+            <div class="flex flex-col w-80 h-full gap-4">
+                <div class="flex items-center justify-between px-2">
+                    <div class="flex items-center gap-2">
+                        <div class="size-2.5 rounded-full bg-slate-400"></div>
+                        <h2 class="text-[#111418] dark:text-white text-sm font-bold uppercase tracking-wider">To-do</h2>
+                        <span id="count-Todo"
+                            class="text-[#6b7280] dark:text-[#9dabb9] text-xs font-medium bg-[#e5e7eb] dark:bg-[#283039] px-2 py-0.5 rounded-full">0</span>
+                    </div>
+                </div>
+                <div id="col-Todo" class="flex-1 flex flex-col gap-3 overflow-y-auto pr-2" ondrop="drop(event)"
+                    ondragover="allowDrop(event)" data-status="Todo">
+                    <!-- Tasks go here -->
+                </div>
+            </div>
+
+            <!-- 2. In Progress -->
+            <div class="flex flex-col w-80 h-full gap-4">
+                <div class="flex items-center justify-between px-2">
+                    <div class="flex items-center gap-2">
+                        <div class="size-2.5 rounded-full bg-primary animate-pulse"></div>
+                        <h2 class="text-[#111418] dark:text-white text-sm font-bold uppercase tracking-wider">In
+                            Progress</h2>
+                        <span id="count-InProgress"
+                            class="text-[#6b7280] dark:text-[#9dabb9] text-xs font-medium bg-[#e5e7eb] dark:bg-[#283039] px-2 py-0.5 rounded-full">0</span>
+                    </div>
+                </div>
+                <div id="col-InProgress"
+                    class="flex-1 flex flex-col gap-3 overflow-y-auto pr-2 bg-blue-50/5 dark:bg-blue-900/5 rounded-xl border border-dashed border-blue-200 dark:border-blue-800 p-2"
+                    ondrop="drop(event)" ondragover="allowDrop(event)" data-status="In Progress">
+
+                </div>
+            </div>
+
+            <!-- 3. In Review -->
+            <div class="flex flex-col w-80 h-full gap-4">
+                <div class="flex items-center justify-between px-2">
+                    <div class="flex items-center gap-2">
+                        <div class="size-2.5 rounded-full bg-purple-500"></div>
+                        <h2 class="text-[#111418] dark:text-white text-sm font-bold uppercase tracking-wider">In Review
+                        </h2>
+                        <span id="count-InReview"
+                            class="text-[#6b7280] dark:text-[#9dabb9] text-xs font-medium bg-[#e5e7eb] dark:bg-[#283039] px-2 py-0.5 rounded-full">0</span>
+                    </div>
+                </div>
+                <div id="col-InReview" class="flex-1 flex flex-col gap-3 overflow-y-auto pr-2" ondrop="drop(event)"
+                    ondragover="allowDrop(event)" data-status="In Review">
+
+                </div>
+            </div>
+
+            <!-- 4. Rejected -->
+            <div class="flex flex-col w-80 h-full gap-4">
+                <div class="flex items-center justify-between px-2">
+                    <div class="flex items-center gap-2">
+                        <div class="size-2.5 rounded-full bg-red-500"></div>
+                        <h2 class="text-[#111418] dark:text-white text-sm font-bold uppercase tracking-wider">Rejected
+                        </h2>
+                        <span id="count-Rejected"
+                            class="text-[#6b7280] dark:text-[#9dabb9] text-xs font-medium bg-[#e5e7eb] dark:bg-[#283039] px-2 py-0.5 rounded-full">0</span>
+                    </div>
+                </div>
+                <div id="col-Rejected" class="flex-1 flex flex-col gap-3 overflow-y-auto pr-2" ondrop="drop(event)"
+                    ondragover="allowDrop(event)" data-status="Rejected">
+
+                </div>
+            </div>
+
+            <!-- 5. Accepted -->
+            <div class="flex flex-col w-80 h-full gap-4">
+                <div class="flex items-center justify-between px-2">
+                    <div class="flex items-center gap-2">
+                        <div class="size-2.5 rounded-full bg-emerald-500"></div>
+                        <h2 class="text-[#111418] dark:text-white text-sm font-bold uppercase tracking-wider">Accepted
+                        </h2>
+                        <span id="count-Accepted"
+                            class="text-[#6b7280] dark:text-[#9dabb9] text-xs font-medium bg-[#e5e7eb] dark:bg-[#283039] px-2 py-0.5 rounded-full">0</span>
+                    </div>
+                </div>
+                <div id="col-Accepted" class="flex-1 flex flex-col gap-3 overflow-y-auto pr-2" ondrop="drop(event)"
+                    ondragover="allowDrop(event)" data-status="Accepted">
+
+                </div>
+            </div>
+
+            <!-- 6. Completed -->
+            <div class="flex flex-col w-80 h-full gap-4">
+                <div class="flex items-center justify-between px-2">
+                    <div class="flex items-center gap-2">
+                        <div class="size-2.5 rounded-full bg-blue-500"></div>
+                        <h2 class="text-[#111418] dark:text-white text-sm font-bold uppercase tracking-wider">Completed
+                        </h2>
+                        <span id="count-Completed"
+                            class="text-[#6b7280] dark:text-[#9dabb9] text-xs font-medium bg-[#e5e7eb] dark:bg-[#283039] px-2 py-0.5 rounded-full">0</span>
+                    </div>
+                </div>
+                <div id="col-Completed" class="flex-1 flex flex-col gap-3 overflow-y-auto pr-2 opacity-75"
+                    ondrop="drop(event)" ondragover="allowDrop(event)" data-status="Completed">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div
+        class="sticky bottom-0 z-10 w-full bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-t border-[#e5e7eb] dark:border-[#283039] shrink-0">
+        <div class="grid grid-cols-4 h-16 max-w-md mx-auto">
+            <a href="index.html"
+                class="flex flex-col items-center justify-center gap-1 text-[#9dabb9] hover:text-[#111418] dark:hover:text-white transition-colors">
+                <span class="material-symbols-outlined" style="font-size: 24px;">list</span>
+                <span class="text-[10px] font-medium">List</span>
+            </a>
+            <button class="flex flex-col items-center justify-center gap-1 text-primary">
+                <span class="material-symbols-outlined"
+                    style="font-size: 24px; font-variation-settings: 'FILL' 1;">view_kanban</span>
+                <span class="text-[10px] font-bold">Board</span>
+            </button>
+            <a href="calendar.html"
+                class="flex flex-col items-center justify-center gap-1 text-[#9dabb9] hover:text-[#111418] dark:hover:text-white transition-colors">
+                <span class="material-symbols-outlined" style="font-size: 24px;">calendar_month</span>
+                <span class="text-[10px] font-medium">Calendar</span>
+            </a>
+            <a href="settings.html"
+                class="flex flex-col items-center justify-center gap-1 text-[#9dabb9] hover:text-[#111418] dark:hover:text-white transition-colors">
+                <span class="material-symbols-outlined" style="font-size: 24px;">settings</span>
+                <span class="text-[10px] font-medium">Settings</span>
+            </a>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Board Logic
+
+        // Define Columns mapping
+        const columns = {
+            'Todo': document.getElementById('col-Todo'),
+            'In Progress': document.getElementById('col-InProgress'),
+            'In Review': document.getElementById('col-InReview'),
+            'Rejected': document.getElementById('col-Rejected'),
+            'Accepted': document.getElementById('col-Accepted'),
+            'Completed': document.getElementById('col-Completed')
+        };
+
+        const counts = {
+            'Todo': document.getElementById('count-Todo'),
+            'In Progress': document.getElementById('count-InProgress'),
+            'In Review': document.getElementById('count-InReview'),
+            'Rejected': document.getElementById('count-Rejected'),
+            'Accepted': document.getElementById('count-Accepted'),
+            'Completed': document.getElementById('count-Completed')
+        };
+
+        function renderBoard() {
+            // Clear all columns
+            Object.values(columns).forEach(col => col.innerHTML = '');
+            Object.values(counts).forEach(c => c.textContent = '0');
+
+            const allTasks = TaskManager.getAll();
+            const taskCounts = {};
+
+            allTasks.forEach(task => {
+                const status = task.status || 'Todo';
+                const col = columns[status];
+
+                if (col) {
+                    col.appendChild(createCard(task));
+
+                    // Update count
+                    taskCounts[status] = (taskCounts[status] || 0) + 1;
+                }
+            });
+
+            // Update UI counts
+            for (const [status, count] of Object.entries(taskCounts)) {
+                if (counts[status]) counts[status].textContent = count;
+            }
+        }
+
+        function createCard(task) {
+            const div = document.createElement('div');
+            div.className = "bg-white dark:bg-[#1b252f] p-4 rounded-xl border border-[#e5e7eb] dark:border-[#283039] shadow-sm hover:border-primary transition-all cursor-grab active:cursor-grabbing group relative";
+            div.draggable = true;
+            div.id = `task-${task.id}`;
+            div.ondragstart = drag;
+
+            // Priority Colors
+            let priorityColor = 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400';
+            if (task.priority === 'High') priorityColor = 'bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400';
+            if (task.priority === 'Medium') priorityColor = 'bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400';
+            if (task.priority === 'Low') priorityColor = 'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400';
+
+            // Due Date formatting
+            const date = new Date(task.dueDate);
+            const dateStr = date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+
+            // Check if overdue
+            const isOverdue = new Date() > date && task.status !== 'Completed';
+            const dateColor = isOverdue ? 'text-red-500' : 'text-[#9dabb9]';
+
+            div.innerHTML = `
+                <div class="flex justify-between items-start mb-2">
+                    <span class="px-2 py-0.5 rounded-md ${priorityColor} text-[10px] font-bold uppercase tracking-wide">${task.priority}</span>
+                    <button class="opacity-0 group-hover:opacity-100 text-[#9dabb9] hover:text-primary transition-opacity" onclick="event.stopPropagation(); window.location.href='todo.html?id=${task.id}'">
+                        <span class="material-symbols-outlined" style="font-size: 18px;">edit</span>
+                    </button>
+                </div>
+                <h3 class="text-[#111418] dark:text-white text-sm font-bold leading-tight mb-3 line-clamp-2">${task.title}</h3>
+                
+                <div class="flex items-center justify-between mt-auto">
+                    <div class="flex items-center gap-1.5 ${dateColor}">
+                         <span class="material-symbols-outlined" style="font-size: 16px;">calendar_today</span>
+                         <span class="text-xs font-medium">${dateStr}</span>
+                    </div>
+                     <div class="user-profile-pic bg-center bg-no-repeat bg-cover rounded-full size-6 ring-2 ring-white dark:ring-[#1b252f]"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBSvQA1ClEstSkKWz5BSF3vy6pl6ZzgdxthIri9JmaONsH1EvkUjsO_GYH1G4ls0CjA815iIj5xRR1I7OtmmYYX7byqI983vpW0nGDz0pMQ-qfWSPhqq7eGwsivMxc7mYSI7ivF8KjYvmPtwxeRPeOwCApcpnAeyQUe1CdLz6qDr0KZqd8vHFVaS6t_xR9bSfuM44oSmPHTF9LM8COa-pLBlgI0xI2pe8SbYIdoDDmw3i-FrYHYkoMlJjVnkYwBznbvi2GPFv0yCEg");'>
+                    </div>
+                </div>
+            `;
+
+            div.addEventListener('click', () => {
+                window.location.href = `todo.html?id=${task.id}`;
+            });
+
+            return div;
+        }
+
+        // Drag and Drop
+        function allowDrop(ev) {
+            ev.preventDefault();
+            // Optional: highlight drop zone
+            ev.currentTarget.classList.add('bg-gray-100', 'dark:bg-[#1f2937]');
+        }
+
+        // Clean up styles on drag leave logic (simple version)
+        document.addEventListener('dragend', () => {
+            document.querySelectorAll('.board-container > div > div:last-child').forEach(el => {
+                el.classList.remove('bg-gray-100', 'dark:bg-[#1f2937]');
+            });
+        });
+
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text/plain", ev.target.id);
+            ev.dataTransfer.effectAllowed = "move";
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            const data = ev.dataTransfer.getData("text/plain");
+            const draggedElement = document.getElementById(data);
+            const dropZone = ev.currentTarget;
+
+            // Remove highlight
+            dropZone.classList.remove('bg-gray-100', 'dark:bg-[#1f2937]');
+
+            if (draggedElement && dropZone.id.startsWith('col-')) {
+                dropZone.appendChild(draggedElement);
+
+                // Update Status
+                const newStatus = dropZone.dataset.status;
+                const taskId = data.replace('task-', '');
+
+                const task = TaskManager.getById(taskId);
+                if (task) {
+                    task.status = newStatus;
+                    TaskManager.save(task);
+                    renderBoard(); // Re-render to update counts and sort if needed
+                }
+            }
+        }
+
+        // New Task Button
+        document.getElementById('add-task-btn').addEventListener('click', () => {
+            // We can reuse the modal logic by redirecting to index.html#new or just open todo.html with new param
+            // Simpler: Go to todo.html?new=true
+            window.location.href = 'todo.html?new=true&isboard=true';
+        });
+
+        // Initialize
+        renderBoard();
+
+
+        // Reset drag styles on dragleave (imperfect but helps)
+        const dropZones = document.querySelectorAll('[id^="col-"]');
+        dropZones.forEach(zone => {
+            zone.addEventListener('dragleave', (e) => {
+                if (e.target === zone) {
+                    zone.classList.remove('bg-gray-100', 'dark:bg-[#1f2937]');
+                }
+            });
+        });
+
+        // Init Profile
+        function initProfile() {
+            const profile = app.userProfile;
+            const pic = document.getElementById('header-profile-pic');
+
+            if (profile && profile.photo) {
+                pic.style.backgroundImage = `url("${profile.photo}")`;
+            } else {
+                pic.style.backgroundImage = 'none';
+                // Could add placeholder logic if desired, but size-10 empty is fine or default icon bg
+                pic.innerHTML = '<span class="material-symbols-outlined text-gray-400 w-full h-full flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-full">person</span>';
+            }
+        }
+        initProfile();
+
+    </script>
+</body>
+
+</html>

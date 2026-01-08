@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Calendar</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+    <script src="app.js"></script>
+    <script src="calendar.js" defer></script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display">
+    <div
+        class="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden max-w-md mx-auto border-x border-[#e5e7eb] dark:border-[#283039]">
+        <!-- Header -->
+        <div
+            class="flex items-center p-4 pb-2 justify-between border-b border-[#e5e7eb] dark:border-[#283039] bg-background-light dark:bg-background-dark sticky top-0 z-10">
+            <h1 class="text-[#111418] dark:text-white text-2xl font-bold leading-tight tracking-[-0.015em]">Calendar
+            </h1>
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[#111418] dark:text-white"
+                    style="font-size: 24px;">more_horiz</span>
+            </div>
+        </div>
+
+        <div class="flex flex-col flex-1 p-4 gap-4">
+
+            <!-- Month Selector -->
+            <div class="flex items-center justify-between">
+                <span id="prev-month"
+                    class="material-symbols-outlined text-[#6b7280] dark:text-[#9dabb9] cursor-pointer select-none active:scale-95 transition-transform">chevron_left</span>
+                <span id="current-month-display" class="text-[#111418] dark:text-white text-lg font-bold">January
+                    2026</span>
+                <span id="next-month"
+                    class="material-symbols-outlined text-[#6b7280] dark:text-[#9dabb9] cursor-pointer select-none active:scale-95 transition-transform">chevron_right</span>
+            </div>
+
+            <!-- Days Grid -->
+            <div class="grid grid-cols-7 gap-1 text-center mb-2">
+                <span class="text-xs font-bold text-[#6b7280] dark:text-[#9dabb9] uppercase">Mon</span>
+                <span class="text-xs font-bold text-[#6b7280] dark:text-[#9dabb9] uppercase">Tue</span>
+                <span class="text-xs font-bold text-[#6b7280] dark:text-[#9dabb9] uppercase">Wed</span>
+                <span class="text-xs font-bold text-[#6b7280] dark:text-[#9dabb9] uppercase">Thu</span>
+                <span class="text-xs font-bold text-[#6b7280] dark:text-[#9dabb9] uppercase">Fri</span>
+                <span class="text-xs font-bold text-[#6b7280] dark:text-[#9dabb9] uppercase">Sat</span>
+                <span class="text-xs font-bold text-[#6b7280] dark:text-[#9dabb9] uppercase">Sun</span>
+            </div>
+
+            <div id="calendar-grid" class="grid grid-cols-7 gap-1 text-center">
+                <!-- Javascript will populate this -->
+            </div>
+
+            <!-- Selected Day View -->
+            <div class="flex items-center justify-between mt-4">
+                <p id="selected-date-display"
+                    class="px-2 text-[#6b7280] dark:text-[#9dabb9] text-xs font-bold uppercase tracking-wider">
+                    --
+                </p>
+                <button id="add-task-date-btn" class="text-xs font-bold text-primary hover:underline">
+                    + Add Task
+                </button>
+            </div>
+
+            <div id="selected-day-tasks" class="flex flex-col gap-3 min-h-[100px]">
+                <!-- Dynamic tasks will go here -->
+                <div class="flex items-center justify-center p-8 text-[#9dabb9] text-sm italic">
+                    Select a date to view tasks
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div
+            class="sticky bottom-0 z-10 w-full bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-t border-[#e5e7eb] dark:border-[#283039]">
+            <div class="grid grid-cols-4 h-16">
+                <a href="index.html"
+                    class="flex flex-col items-center justify-center gap-1 text-[#9dabb9] hover:text-[#111418] dark:hover:text-white transition-colors">
+                    <span class="material-symbols-outlined" style="font-size: 24px;">list</span>
+                    <span class="text-[10px] font-medium">Tasks</span>
+                </a>
+                <button class="flex flex-col items-center justify-center gap-1 text-primary">
+                    <span class="material-symbols-outlined"
+                        style="font-size: 24px; font-variation-settings: 'FILL' 1;">calendar_month</span>
+                    <span class="text-[10px] font-bold">Calendar</span>
+                </button>
+                <a href="alerts.html"
+                    class="flex flex-col items-center justify-center gap-1 text-[#9dabb9] hover:text-[#111418] dark:hover:text-white transition-colors">
+                    <span class="material-symbols-outlined" style="font-size: 24px;">notifications</span>
+                    <span class="text-[10px] font-medium">Alerts</span>
+                </a>
+                <a href="settings.html"
+                    class="flex flex-col items-center justify-center gap-1 text-[#9dabb9] hover:text-[#111418] dark:hover:text-white transition-colors">
+                    <span class="material-symbols-outlined" style="font-size: 24px;">settings</span>
+                    <span class="text-[10px] font-medium">Settings</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
